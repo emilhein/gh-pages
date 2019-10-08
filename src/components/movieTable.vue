@@ -66,7 +66,7 @@
       <article class="tile is-child notification is-success">
         <div class="content">
           <p class="title">Add movie</p>
-          <p class="subtitle">Just fille in the values</p>
+          <p class="subtitle">Just fill in the values</p>
           <div class="content">
             <insertMovie @addMovie="createMovieinput"></insertMovie>
           </div>

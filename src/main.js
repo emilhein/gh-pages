@@ -6,10 +6,14 @@ import "./registerServiceWorker";
 import { apolloProvider } from "../graphql/apollo";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
-
+import * as Sentry from "@sentry/browser";
+import * as Integrations from "@sentry/integrations";
 Vue.use(Buefy);
 Vue.config.productionTip = false;
-
+Sentry.init({
+    dsn: "https://df96bc14e84a4b42ae9fee0ab37d1f2c@sentry.io/1773699",
+    integrations: [new Integrations.Vue({ Vue, attachProps: true })]
+});
 new Vue({
     router,
     apolloProvider,
