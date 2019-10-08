@@ -6,8 +6,18 @@ branches:
         - master
 install:
     - npm install
-    - npm run generate
-before_script:
-    - sed -i "s/GH_TOKEN/${GH_TOKEN}/" _config.yml
 script:
-    - npm run deploy
+    - npm run build
+cache:
+    directories:
+        - "node_modules"
+deploy:
+    provider: pages
+    local_dir: dist
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+    repo: emilhein/emilhein.github.com
+    target-branch: master
+    keep_history: true
+    on:
+        branch: master
