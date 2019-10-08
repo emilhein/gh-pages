@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+    - stable
+branches:
+    only:
+        - master
+install:
+    - npm install
+    - npm run generate
+before_script:
+    - sed -i "s/GH_TOKEN/${GH_TOKEN}/" _config.yml
+script:
+    - npm run deploy
