@@ -15,8 +15,9 @@
             ></b-input>
           </article>
           <article class="tile is-child notification is-warning">
-            <p class="title">...tiles</p>
-            <p class="subtitle">Bottom tile</p>
+            <p class="title">...Auth</p>
+            <p class="subtitle">login tile</p>
+            <auth />
           </article>
         </div>
         <div class="tile is-parent">
@@ -33,7 +34,6 @@
         <article class="tile is-child notification is-danger">
           <div class="buttons">
 
-            <!-- <b-button @click="login">Login</b-button> -->
             <b-button
               type="is-dark"
               :disabled="checkedRows.length === 0"
@@ -41,11 +41,6 @@
 
           </div>
           <h3 v-if="loading">Loading...</h3>
-
-          <!-- <b-input
-            v-if="token"
-            v-model="token"
-          ></b-input> -->
 
           <div
             v-if="!loading"
@@ -77,15 +72,15 @@
 </template>
 
 <script>
-// import { store } from "./../store";
-
 import { GET_ALL_USERS_QUERY } from "../../graphql/queries/userQueries";
 import { ADD_MOVIE, LOGIN } from "../../graphql/queries/movieMutation";
 import insertMovie from "@/components/smallComponents/insertMovie.vue";
+import auth from "@/components/auth/Login.vue";
 
 export default {
   components: {
-    insertMovie
+    insertMovie,
+    auth
   },
   data() {
     return {
@@ -136,6 +131,7 @@ export default {
         });
         this.success();
       } catch (error) {
+        // eslint-disable-next-line
         console.log(`Error: ${error}`);
       }
     },

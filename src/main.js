@@ -6,6 +6,12 @@ import "./registerServiceWorker";
 import { apolloProvider } from "../graphql/apollo";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
+// import firebase from "firebase";
+// import firebase from "firebase";
+
+// const firebaseui = require("firebaseui");
+// import { config } from "./config/firebaseConfig";
+
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
 Vue.use(Buefy);
@@ -18,5 +24,6 @@ new Vue({
     router,
     apolloProvider,
     store,
+
     render: h => h(App)
 }).$mount("#app");
