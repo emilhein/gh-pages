@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div id="loader">Loading...</div>
-    <div
-      v-if="!authenticated"
-      id="firebaseui-auth-container"
-    ></div>
-
-    <div v-else>
+    <div v-if="authenticated">
       <p class="subtitle">Hi {{user.displayName}}</p>
-
       <b-button
         type="is-dark"
         @click="signout"
       >Sign out</b-button>
     </div>
+    <div v-else>
+      <b-button
+        type="is-dark"
+        @click="googleLogin"
+      >Google</b-button>
+    </div>
+
   </div>
 
 </template>
@@ -21,91 +21,60 @@
 <script>
 import firebase from "firebase";
 
-const firebaseui = require("firebaseui");
 import { config } from "../../config/firebaseConfig";
-const uiConfig = {
-  callbacks: {
-    signInSuccessWithAuthResult(authResult) {
-      if (authResult.user) {
-        this.$store.dispatch("setUser", authResult.user);
-      }
-      // if (authResult.additionalUserInfo) {
-      //   document.getElementById("is-new-user").textContent = authResult
-      //     .additionalUserInfo.isNewUser
-      //     ? "New User"
-      //     : "Existing User";
-      // }
-      // Do not redirect.
-      return false;
-    },
-    uiShown: function() {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById("loader").style.display = "none";
-    }
-  },
-  signInFlow: "popup",
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID
-  ]
-};
 // Initialize Firebase
 firebase.initializeApp(config);
+
 export default {
   name: "auth",
   created() {
-    firebase.auth().onAuthStateChanged(user => {
-      let userVarified = user ? JSON.stringify(user) : null;
-      this.$store.dispatch("setUser", userVarified);
-    });
+    // firebase.auth().onAuthStateChanged(user => {
+    //   let userVarified = user ? JSON.stringify(user) : null;
+    //   this.$store.dispatch("setUser", userVarified);
+    // });
   },
   mounted() {
     this.showSignin();
   },
   methods: {
-    showSignin() {
-      let ui = firebaseui.auth.AuthUI.getInstance();
-      if (!ui) {
-        ui = new firebaseui.auth.AuthUI(firebase.auth());
-      }
-      //   if (!this.authenticated) {
-      ui.start("#firebaseui-auth-container", uiConfig);
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user && !user.emailVerified) {
-          this.$store.dispatch("setUser", user);
-        }
+    alert(err) {
+      this.$buefy.toast.open({
+        duration: 5000,
+        message: err,
+        type: "is-danger"
       });
-
-      //   }
+    },
+    async googleLogin() {
+      try {
+        const result = await firebase.auth().signInWithPopup(googleProvider);
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        //const token = result.credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        this.$store.dispatch("setUser", user);
+      } catch (error) {
+        this.alert(error);
+        // ...
+        // Handle Errors here.
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        // // The email of the user's account used.
+        // var email = error.email;
+        // // The firebase.auth.AuthCredential type that was used.
+        // var credential = error.credential;
+        // // ...
+      }
     },
     async signout() {
-      //   await firebase.auth().signOut();
-      //   this.$store.dispatch("signOut");
-      //   let ui = new firebaseui.auth.AuthUI(firebase.auth());
-      let ui = firebaseui.auth.AuthUI.getInstance();
-      if (!ui) {
-        ui = new firebaseui.auth.AuthUI(firebase.auth());
+      try {
+        await firebase.auth().signOut();
+        // Sign-out successful.
+        this.$store.dispatch("signOut");
+      } catch (error) {
+        this.alert(error);
       }
-      console.log(`logout clicked`);
-      const res = await firebase.auth().signOut();
-      console.log(res);
-      console.log(ui);
-      // .then(res => {
-      //   console.log("signOut ok", res);
-      ui.start("#firebaseui-auth-container", uiConfig);
-      //   return res || "okay";
-      // })
-      // .catch(err => {
-      //   console.warn("signOut error", err);
-      //   return err || "error";
-      // })
-      // .finally(res => {
-      //   console.log("signOut resolved", res);
-      //   // stateChange handles all of my instances onAuthStateChanged and application state
-      //   // returns nothing (no response)
-      // });
     }
   },
   computed: {

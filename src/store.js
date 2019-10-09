@@ -24,11 +24,14 @@ export default new Vuex.Store({
             return state.apiToken;
         },
         getUser(state) {
-            return JSON.parse(state.user);
+            // if (typeof state.user === String) return JSON.parse(state.user);
+            return state.user;
         },
         isAuthenticated(state) {
             if (state.user === null) return false;
-            let weHaveUser = JSON.parse(state.user).uid ? true : false;
+            // console.log(`type: ${typeof state.user}`);
+            // if (typeof state.user !== String) return false;
+            let weHaveUser = state.user.email ? true : false;
             return weHaveUser;
         }
     },

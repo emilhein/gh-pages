@@ -22,15 +22,21 @@
         </div>
         <div class="tile is-parent">
           <article class="tile is-child notification is-info">
-            <p class="title">Middle tile</p>
-            <p class="subtitle">With an image</p>
-            <figure class="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/640x480.png">
+            <p class="title">Chart</p>
+            <p class="subtitle">{{ this.authenticated ? 'Select some movie title' : 'Try to login and select some movie titles'}}</p>
+            <figure>
+              <apex-chart
+                :dataSerie="dataSerie"
+                :labels="labels"
+              ></apex-chart>
             </figure>
           </article>
         </div>
       </div>
-      <div class="tile is-parent">
+      <div
+        v-if="authenticated"
+        class="tile is-parent"
+      >
         <article class="tile is-child notification is-danger">
           <div class="buttons">
 
@@ -75,18 +81,21 @@
 import { GET_ALL_USERS_QUERY } from "../../graphql/queries/userQueries";
 import { ADD_MOVIE, LOGIN } from "../../graphql/queries/movieMutation";
 import insertMovie from "@/components/smallComponents/insertMovie.vue";
+import apexChart from "@/components/smallComponents/chart.vue";
 import auth from "@/components/auth/Login.vue";
 
 export default {
   components: {
     insertMovie,
-    auth
+    auth,
+    apexChart
   },
   data() {
     return {
       loading: true,
-
       movies: [],
+      defaultSerie: { name: "Test", data: [1, 2, 3] },
+      defaultLabels: ["First", "Second", "Third"],
       checkedRows: [],
       columns: [
         {
@@ -162,6 +171,19 @@ export default {
       set(token) {
         this.setToken(token);
       }
+    },
+    dataSerie() {
+      return this.checkedRows.length === 0
+        ? this.defaultSerie
+        : { name: "Reactive", data: this.checkedRows.map(e => e.rating) };
+    },
+    labels() {
+      return this.checkedRows.length === 0
+        ? this.defaultLabels
+        : this.checkedRows.map(e => e.year);
+    },
+    authenticated() {
+      return this.$store.getters.isAuthenticated;
     }
   }
   //   mounted() {
