@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="token">
     <b-field label="Title">
       <b-input v-model="model.title"></b-input>
     </b-field>
@@ -25,6 +25,9 @@
     </b-field>
     <b-button @click="emitEvent">Add movie</b-button>
   </section>
+  <section v-else>
+    <p> You need an Apollo token</p>
+  </section>
 </template>
 
 <script>
@@ -44,6 +47,11 @@ export default {
         rating: "0.0"
       }
     };
+  },
+  computed: {
+    token() {
+      return this.$store.getters.getToken;
+    }
   }
 };
 </script>
