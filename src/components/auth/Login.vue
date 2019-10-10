@@ -2,6 +2,11 @@
   <div>
     <div v-if="authenticated">
       <p class="subtitle">Hi {{user.displayName}}</p>
+      <b-input
+        v-if="firebaseToken"
+        v-model="firebaseToken"
+      ></b-input>
+      <br />
       <b-button
         type="is-dark"
         @click="signout"
@@ -49,6 +54,13 @@ export default {
     async googleLogin() {
       try {
         const result = await firebase.auth().signInWithPopup(googleProvider);
+        const firebaseToken = await firebase
+          .auth()
+          .currentUser.getIdToken(/* forceRefresh */ true);
+        this.$store.dispatch("setFirebaseToken", firebaseToken);
+
+        // console.log(`Firebase Token ${firebaseToken}`);
+
         // This gives you a Google Access Token. You can use it to access the Google API.
         //const token = result.credential.accessToken;
         // The signed-in user info.
@@ -83,6 +95,14 @@ export default {
     },
     user() {
       return this.$store.getters.getUser;
+    },
+    firebaseToken: {
+      get() {
+        return this.$store.getters.getFirebaseToken;
+      },
+      set(token) {
+        this.$store.dispatch("setFirebaseToken", token);
+      }
     }
   }
 };

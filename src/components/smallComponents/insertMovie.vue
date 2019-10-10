@@ -6,9 +6,10 @@
 
     <b-field label="Year">
       <b-input
-        type="number"
+        type="Number"
         v-model="model.year"
-        maxlength="4"
+        min="0"
+        :max=" parseInt(new Date().getFullYear())"
       >
       </b-input>
     </b-field>
@@ -31,6 +32,7 @@ export default {
   name: "insertMovie",
   methods: {
     emitEvent() {
+      this.model.year = parseInt(this.model.year);
       this.$emit("addMovie", this.model);
     }
   },
@@ -38,7 +40,7 @@ export default {
     return {
       model: {
         title: "",
-        year: new Date().getFullYear(),
+        year: parseInt(new Date().getFullYear()),
         rating: "0.0"
       }
     };
