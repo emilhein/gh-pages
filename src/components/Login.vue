@@ -26,7 +26,7 @@
 <script>
 import firebase from "firebase";
 
-import { config } from "../../config/firebaseConfig";
+import { config } from "../config/firebaseConfig";
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // Initialize Firebase

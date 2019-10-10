@@ -91,9 +91,9 @@
 <script>
 import { GET_ALL_USERS_QUERY } from "../../graphql/queries/userQueries";
 import { ADD_MOVIE, LOGIN } from "../../graphql/queries/movieMutation";
-import insertMovie from "@/components/smallComponents/insertMovie.vue";
-import apexChart from "@/components/smallComponents/chart.vue";
-import auth from "@/components/auth/Login.vue";
+import insertMovie from "@/components/InsertMovie.vue";
+import apexChart from "@/components/Chart.vue";
+import auth from "@/components/Login.vue";
 
 export default {
   components: {

@@ -23,10 +23,10 @@
         class="navbar-menu"
       >
         <div class="navbar-end">
-          <a
+          <!-- <a
             href="#"
             class="navbar-item is-active"
-          >Home</a>
+          >Home</a> -->
           <!-- <a
             href="#"
             class="navbar-item"
