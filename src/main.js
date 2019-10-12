@@ -7,7 +7,8 @@ import { apolloProvider } from "../graphql/apollo";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 import VueApexCharts from "vue-apexcharts";
-
+import Chat from "vue-beautiful-chat";
+Vue.use(Chat);
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
 Vue.use(Buefy);

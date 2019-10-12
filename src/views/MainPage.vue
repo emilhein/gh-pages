@@ -1,57 +1,76 @@
 <template>
+  <div>
 
-  <div class="tile is-ancestor">
-    <div class="tile is-vertical is-8">
-      <div class="tile">
-        <div class="tile is-parent is-vertical">
-          <article class="tile is-child notification is-primary">
-            <p class="title">Your Apollo token!</p>
-            <p class="subtitle">
-              <b-button @click="login">{{ (token ? 'Refresh token' : 'Get token')}}</b-button>
-            </p>
-            <b-input
-              v-if="token"
-              v-model="token"
-            ></b-input>
-          </article>
-          <article class="tile is-child notification is-warning">
-            <p class="title">...Auth</p>
-            <p class="subtitle">Your firebase token</p>
-            <auth />
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child notification is-info">
-            <p class="title">Chart</p>
-            <p class="subtitle">{{ this.authenticated ? 'Select some movie titles' : 'Try to login and select some movie titles'}}</p>
-            <figure>
-              <apex-chart
-                :dataSerie="dataSerie"
-                :labels="labels"
-              ></apex-chart>
-            </figure>
-          </article>
-        </div>
-      </div>
-      <div class="tile is-parent">
-        <article class="tile is-child notification is-danger">
-
-          <movieTable @checkChanged="changeChecked"></movieTable>
-        </article>
-      </div>
-    </div>
-    <div class="tile is-parent">
-      <article class="tile is-child notification is-success">
-        <div class="content">
-          <p class="title">Add movie</p>
-          <p class="subtitle">Just fill in the values</p>
-          <div class="content">
-            <insertMovie @addMovie="createMovieinput"></insertMovie>
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-primary">
+              <p class="title">Your Apollo token!</p>
+              <p class="subtitle">
+                <b-button @click="login">{{ (token ? 'Refresh token' : 'Get token')}}</b-button>
+              </p>
+              <b-input
+                v-if="token"
+                v-model="token"
+              ></b-input>
+            </article>
+            <article class="tile is-child notification is-warning">
+              <p class="title">...Auth</p>
+              <p class="subtitle">Your firebase token</p>
+              <auth />
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+              <p class="title">Chart</p>
+              <p class="subtitle">{{ this.authenticated ? 'Select some movie titles' : 'Try to login and select some movie titles'}}</p>
+              <figure>
+                <apex-chart
+                  :dataSerie="dataSerie"
+                  :labels="labels"
+                ></apex-chart>
+              </figure>
+            </article>
           </div>
         </div>
-      </article>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-danger">
+            <movieTable @checkChanged="changeChecked"></movieTable>
+          </article>
+        </div>
+
+      </div>
+      <div class="tile is-parent">
+
+        <article class="tile is-child notification is-success">
+          <div class="content">
+            <p class="title">Add movie</p>
+            <p class="subtitle">Just fill in the values</p>
+            <div class="content">
+              <insertMovie @addMovie="createMovieinput"></insertMovie>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
     </div>
+    <!-- 
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-16">
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-danger">
+            <echo-chat></echo-chat>
+          </article>
+        </div>
+
+      </div>
+    </div> -->
+    <echo-chat></echo-chat>
+
   </div>
+
 </template>
 
 <script>
@@ -59,12 +78,14 @@ import { ADD_MOVIE, LOGIN } from "../../graphql/queries/movieMutation";
 import apexChart from "@/components/Chart.vue";
 import insertMovie from "@/components/InsertMovie.vue";
 import movieTable from "@/components/MovieTable.vue";
+import echoChat from "@/components/EchoChat.vue";
 import auth from "@/components/Login.vue";
 
 export default {
   components: {
     insertMovie,
     auth,
+    echoChat,
     apexChart,
     movieTable
   },
