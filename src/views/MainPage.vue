@@ -35,42 +35,8 @@
       </div>
       <div class="tile is-parent">
         <article class="tile is-child notification is-danger">
-          <div class="buttons">
 
-            <b-button
-              type="is-dark"
-              :disabled="checkedRows.length === 0"
-            >Delete rows</b-button>
-
-          </div>
-          <h3 v-if="loading">Loading...</h3>
-
-          <div
-            v-if="!loading"
-            class="content"
-          >
-            <b-table
-              :data="computedMovies"
-              checkable
-              :focusable="true"
-              :checked-rows.sync="checkedRows"
-              :columns="columns"
-            >
-              <template slot="empty">
-                <section class="section">
-                  <div class="content has-text-grey has-text-centered">
-                    <p>
-                      <b-icon
-                        icon="emoticon-sad"
-                        size="is-large"
-                      >
-                      </b-icon>
-                    </p>
-                    <p>Login to see the movies!</p>
-                  </div>
-                </section>
-              </template></b-table>
-          </div>
+          <movieTable @checkChanged="changeChecked"></movieTable>
         </article>
       </div>
     </div>
@@ -89,51 +55,28 @@
 </template>
 
 <script>
-import { GET_ALL_USERS_QUERY } from "../../graphql/queries/userQueries";
 import { ADD_MOVIE, LOGIN } from "../../graphql/queries/movieMutation";
-import insertMovie from "@/components/InsertMovie.vue";
 import apexChart from "@/components/Chart.vue";
+import insertMovie from "@/components/InsertMovie.vue";
+import movieTable from "@/components/MovieTable.vue";
 import auth from "@/components/Login.vue";
 
 export default {
   components: {
     insertMovie,
     auth,
-    apexChart
+    apexChart,
+    movieTable
   },
   data() {
     return {
       loading: true,
-      movies: [],
       defaultSerie: { name: "Test", data: [1, 2, 3] },
       defaultLabels: ["First", "Second", "Third"],
-      checkedRows: [],
-      columns: [
-        {
-          field: "title",
-          label: "Movie title",
-          sortable: true
-        },
-        {
-          field: "rating",
-          label: "Rating",
-          sortable: true
-        },
-        {
-          field: "year",
-          label: "Year",
-          sortable: true
-        }
-      ]
+      checkedRows: []
     };
   },
-  async mounted() {
-    this.loading = true;
-    this.movies = (await this.$apollo.query({
-      query: GET_ALL_USERS_QUERY
-    })).data.movies;
-    this.loading = false;
-  },
+
   methods: {
     setToken(token) {
       this.$store.dispatch("setToken", token);
@@ -150,7 +93,8 @@ export default {
             year
           }
         });
-        this.success();
+
+        this.success("The movie is added");
       } catch (error) {
         this.error(error);
       }
@@ -161,8 +105,11 @@ export default {
         type: "is-danger"
       });
     },
-    success() {
-      this.$buefy.toast.open("The movie is added");
+    success(string) {
+      this.$buefy.toast.open(string);
+    },
+    changeChecked(newChecked) {
+      this.checkedRows = newChecked;
     },
     async login() {
       const {
@@ -201,9 +148,6 @@ export default {
     },
     authenticated() {
       return this.$store.getters.isAuthenticated;
-    },
-    computedMovies() {
-      return !this.authenticated ? [] : this.movies;
     }
   }
 };
@@ -213,8 +157,6 @@ export default {
 .center {
   margin-right: 10px;
   margin-left: 10px;
-  /* width: 50%;
-  margin-left: 25%; */
 }
 .tile.is-ancestor {
   padding: 0.75rem;

@@ -18,3 +18,10 @@ export const ADD_MOVIE = gql`
         }
     }
 `;
+export const DELETE_MOVIE = gql`
+    mutation deleteMovie($title: String!) {
+        deleteMovie(input: { title: $title }) {
+            deleted
+        }
+    }
+`;
