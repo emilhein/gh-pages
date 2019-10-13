@@ -44,10 +44,21 @@ export default {
         });
       }
     },
-    onMessageWasSent(message) {
+    async onMessageWasSent(message) {
       let botMsg = { ...message };
       botMsg.author = "gobackend";
+      await fetch(this.apiUrl, {
+        method: "post",
+        body: JSON.stringify({ message: "heelo mate" })
+      })
+        .then(function(response) {
+          console.log(response.json());
 
+          return response.json();
+        })
+        .then(function(data) {
+          console.log("Created Gist:", data.html_url);
+        });
       // called when the user sends a message
       this.messageList = [...this.messageList, message, botMsg];
     },
@@ -75,6 +86,7 @@ export default {
   },
   data() {
     return {
+      apiUrl: "https://yak3om2jzk.execute-api.us-east-1.amazonaws.com/dev/echo",
       icons: {
         open: {
           img: OpenIcon,
