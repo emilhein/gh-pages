@@ -28,16 +28,14 @@ import FileIcon from "vue-beautiful-chat/src/assets/file.svg";
 import CloseIconSvg from "vue-beautiful-chat/src/assets/close.svg";
 export default {
   name: "echo-chat",
-  // components: {
-  //   Chat
-  // },
+
   methods: {
-    sendMessage(text) {
+    async sendMessage(text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen
           ? this.newMessagesCount
           : this.newMessagesCount + 1;
-        this.onMessageWasSent({
+        await this.onMessageWasSent({
           author: "support",
           type: "text",
           data: { text }
@@ -45,22 +43,26 @@ export default {
       }
     },
     async onMessageWasSent(message) {
+      this.messageList = [...this.messageList, message];
+      const responseMessage = await this.getEcho(message.data.text);
       let botMsg = { ...message };
       botMsg.author = "gobackend";
-      await fetch(this.apiUrl, {
-        method: "post",
-        body: JSON.stringify({ message: "heelo mate" })
-      })
-        .then(function(response) {
-          console.log(response.json());
-
-          return response.json();
-        })
-        .then(function(data) {
-          console.log("Created Gist:", data.html_url);
-        });
+      botMsg.data.text = responseMessage;
+      this.messageList = [...this.messageList, botMsg];
       // called when the user sends a message
-      this.messageList = [...this.messageList, message, botMsg];
+    },
+    async getEcho(messageRequest) {
+      try {
+        const response = await fetch(this.apiUrl, {
+          method: "post",
+          body: JSON.stringify({ message: messageRequest })
+        });
+        let { message } = await response.json();
+
+        return message;
+      } catch (error) {
+        return Promise.reject(error);
+      }
     },
     openChat() {
       // called when the user clicks on the fab button to open the chat
@@ -76,7 +78,7 @@ export default {
       // leverage pagination for loading another page of messages
     },
     handleOnType() {
-      console.log("Emit typing event");
+      // console.log("Emit typing event");
     },
     editMessage(message) {
       const m = this.messageList.find(m => m.id === message.id);
