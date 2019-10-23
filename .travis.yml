@@ -8,9 +8,9 @@ install:
     - npm install
 script:
     - npm run build
-cache:
-    directories:
-        - "node_modules"
+# cache:
+# directories:
+#     - "node_modules"
 deploy:
     provider: pages
     local_dir: dist
