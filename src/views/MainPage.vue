@@ -22,7 +22,7 @@
             </article>
           </div>
           <div class="tile is-parent">
-            <article class="tile is-child notification is-info">
+            <article class="tile is-child notification">
               <p class="title">Chart</p>
               <p class="subtitle">{{ this.authenticated ? 'Select some movie titles' : 'Try to login and select some movie titles'}}</p>
               <figure>
