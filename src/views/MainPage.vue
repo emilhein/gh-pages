@@ -92,8 +92,8 @@ export default {
   data() {
     return {
       loading: true,
-      defaultSerie: { name: "Test", data: [1, 2, 3] },
-      defaultLabels: ["First", "Second", "Third"],
+      defaultSerie: { name: "Test", data: [1, 5, 3] },
+      defaultLabels: ["2019-01-01", "2019-01-02", "2019-01-03"],
       checkedRows: []
     };
   },
