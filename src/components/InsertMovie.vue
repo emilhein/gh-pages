@@ -14,10 +14,7 @@
       </b-input>
     </b-field>
 
-    <b-field
-      label="Rating"
-      type="is-success"
-    >
+    <b-field label="Rating">
       <b-input
         v-model="model.rating"
         maxlength="30"

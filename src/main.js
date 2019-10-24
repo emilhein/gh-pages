@@ -5,7 +5,7 @@ import store from "./store";
 import "./registerServiceWorker";
 import { apolloProvider } from "../graphql/apollo";
 import Buefy from "buefy";
-import "buefy/dist/buefy.css";
+// import "buefy/dist/buefy.css";
 import VueApexCharts from "vue-apexcharts";
 import Chat from "vue-beautiful-chat";
 Vue.use(Chat);
