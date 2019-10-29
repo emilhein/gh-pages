@@ -92,7 +92,7 @@ export default {
 
   created() {
     var self = this;
-    this.ws = new WebSocket("ws://" + process.env.VUE_APP_WS_ENDPOINT + "/ws");
+    this.ws = new WebSocket("wss://" + process.env.VUE_APP_WS_ENDPOINT + "/ws");
     this.ws.addEventListener("message", function(e) {
       var msg = JSON.parse(e.data);
       self.socketMemory.push(msg);
