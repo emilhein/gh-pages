@@ -19,6 +19,11 @@ export default new Router({
             path: "/websocket",
             name: "websocket",
             component: () => import("./views/WebSocketPage.vue")
+        },
+        {
+            path: "/*",
+            name: "notFound",
+            component: () => import("./views/404.vue")
         }
     ]
 });
