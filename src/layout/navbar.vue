@@ -65,13 +65,13 @@
         </a>
         <a
           class="navbar-item"
-          href="/projects"
+          @click="changeLink('projects')"
         >
           Projects
         </a>
         <a
           class="navbar-item"
-          href="/websocket"
+          @click="changeLink('websocket')"
         >
           Websocket
         </a>
@@ -181,7 +181,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 export default {
   name: "navbar",
-
+  methods: {
+    changeLink(link) {
+      this.$router.push({ path: link });
+    }
+  },
   data() {}
 };
 </script>
