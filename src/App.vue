@@ -10,6 +10,13 @@ import navbar from "./layout/navbar";
 export default {
   components: {
     navbar
+  },
+  mounted() {
+    let path = localStorage.getItem("path");
+    if (path) {
+      localStorage.removeItem("path");
+      this.router.navigate([path]);
+    }
   }
 };
 </script>
