@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: 'emilhein.github.io'
-}
+    publicPath: process.env.NODE_ENV === "production" ? "/" : "/"
+};
