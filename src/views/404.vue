@@ -1,6 +1,6 @@
 <template>
   <div>
-    Error
+    This page does not exist
 
   </div>
 </template>

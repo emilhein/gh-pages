@@ -3,33 +3,51 @@
     On the server there is a 200ms delay on reading from the broadcast channel
     <br>
     <b-button @click="start">Start</b-button>
+    <b-button @click="clear">Clear</b-button>
     <div class="columns is-success">
       <div class="column">
-        Finder
+        <img
+          src="./../assets/finder.jpeg"
+          alt="Finder gohper"
+          width="50%"
+        >
+
         <section>
           <b-table
             :data="finderItems"
             :columns="columns"
+            :row-class="(row, index) => `color-${getNumber(row.content)}`"
           ></b-table>
 
         </section>
       </div>
       <div class="column">
-        Breaker
+        <img
+          src="./../assets/miner.jpeg"
+          alt="Breaker gohper"
+          width="44%"
+        >
+
         <section>
           <b-table
             :data="breakerItems"
             :columns="columns"
+            :row-class="(row, index) => `color-${getNumber(row.content)}`"
           ></b-table>
 
         </section>
       </div>
       <div class="column">
-        Smelter
+        <img
+          src="./../assets/smelter.jpeg"
+          alt="Smelter gohper"
+          width="44%"
+        >
         <section>
           <b-table
             :data="smelterItems"
             :columns="columns"
+            :row-class="(row, index) => `color-${getNumber(row.content)}`"
           ></b-table>
 
         </section>
@@ -40,6 +58,7 @@
           <b-table
             :data="packerItems"
             :columns="columns"
+            :row-class="(row, index) => `color-${getNumber(row.content)}`"
           ></b-table>
 
         </section>
@@ -51,6 +70,8 @@
 </template>
 
 <script>
+import ReconnectingWebSocket from "reconnecting-websocket";
+
 export default {
   name: "websokcet",
   data() {
@@ -74,11 +95,18 @@ export default {
         { name: "Breaker", dataName: "breakerItems" },
         { name: "Smelter", dataName: "smelterItems" },
         { name: "Packer", dataName: "packerItems" }
-      ]
+      ],
+      wsHost: `wss://${process.env.VUE_APP_WS_ENDPOINT}/ws`
     };
   },
 
   methods: {
+    getNumber(string) {
+      return string.match(/\d+/g).map(Number)[0];
+    },
+    clear() {
+      this.socketMemory = [];
+    },
     start() {
       this.ws.send(
         JSON.stringify({
@@ -91,10 +119,11 @@ export default {
   },
 
   created() {
-    var self = this;
-    this.ws = new WebSocket("wss://" + process.env.VUE_APP_WS_ENDPOINT + "/ws");
+    this.ws = new ReconnectingWebSocket(this.wsHost);
+
+    let self = this;
     this.ws.addEventListener("message", function(e) {
-      var msg = JSON.parse(e.data);
+      let msg = JSON.parse(e.data);
       self.socketMemory.push(msg);
     });
   },
@@ -116,4 +145,8 @@ export default {
 </script>
 
 <style scoped>
+tr.color-2 {
+  color: green;
+}
 </style>
+
