@@ -52,7 +52,7 @@
 
         </section>
       </div>
-      <div class="column">
+      <!-- <div class="column">
         Packer
         <section>
           <b-table
@@ -62,7 +62,7 @@
           ></b-table>
 
         </section>
-      </div>
+      </div> -->
 
     </div>
 
@@ -144,8 +144,29 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 tr.color-2 {
+  color: green;
+}
+tr.color-3 {
+  color: blue;
+}
+tr.color-5 {
+  color: red;
+}
+tr.color-6 {
+  color: grey;
+}
+tr.color-8 {
+  color: orange;
+}
+tr.color-9 {
+  color: purple;
+}
+tr.color-11 {
+  color: green;
+}
+tr.color-12 {
   color: green;
 }
 </style>
