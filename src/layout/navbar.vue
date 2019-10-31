@@ -63,12 +63,12 @@
         >
           Home
         </a>
-        <a
+        <!-- <a
           class="navbar-item"
           @click="changeLink('projects')"
         >
           Projects
-        </a>
+        </a> -->
         <a
           class="navbar-item"
           @click="changeLink('websocket')"

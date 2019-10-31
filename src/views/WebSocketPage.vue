@@ -1,9 +1,53 @@
 <template>
   <div>
-    On the server there is a 200ms delay on reading from the broadcast channel
-    <br>
-    <b-button @click="start">Start</b-button>
-    <b-button @click="clear">Clear</b-button>
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-12">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-success">
+              <p class="title">Setup</p>
+              <p class="subtitle">This page has a websocket connection to a
+                <a href="https://github.com/emilhein/go-heroku-server">Go server</a> that push messages from a channel into the websocket. The Go code can be found
+
+                <a href="https://github.com/emilhein/go-aws-webserver">here</a>
+              </p>
+            </article>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-primary">
+              <p class="title">Actions
+                <p class="subtitle">
+                  On the server there is a 200ms delay on reading from the broadcast channel
+                  <br>
+                  <div class="buttons">
+
+                    <b-button
+                      @click="start"
+                      type="is-dark"
+                    >Start</b-button>
+                    <b-button
+                      outlined
+                      @click="clear"
+                      type="is-light"
+                    >Clear</b-button>
+                  </div>
+
+            </article>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-warning">
+              <p class="title">Credit</p>
+              <p class="subtitle">This example is build upon
+                <a href="https://medium.com/@trevor4e/learning-gos-concurrency-through-illustrations-8c4aff603b3">this</a> post
+                with illustations made by
+                <a href="https://medium.com/@trevor4e">Trevor Forrey</a>
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="columns is-success">
       <div class="column">
         <img
