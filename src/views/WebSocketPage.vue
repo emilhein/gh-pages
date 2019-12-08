@@ -47,8 +47,11 @@
         </div>
       </div>
     </div>
-
-    <div class="columns is-success">
+    <div v-if="!ws"> Lading...</div>
+    <div
+      v-else
+      class="columns is-success"
+    >
       <div class="column">
         <img
           src="./../assets/finder.jpeg"
