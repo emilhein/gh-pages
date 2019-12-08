@@ -36,7 +36,10 @@
         </div>
         <div class="tile is-parent">
           <article class="tile is-child notification is-danger">
-            <movieTable @checkChanged="changeChecked"></movieTable>
+            <movieTable
+              :addedMovies="addedMovies"
+              @checkChanged="changeChecked"
+            ></movieTable>
           </article>
         </div>
 
@@ -94,7 +97,8 @@ export default {
       loading: true,
       defaultSerie: { name: "Test", data: [1, 5, 3] },
       defaultLabels: ["2019-01-01", "2019-01-02", "2019-01-03"],
-      checkedRows: []
+      checkedRows: [],
+      localmovies: []
     };
   },
 
@@ -106,16 +110,18 @@ export default {
       try {
         await this.login();
         const { title, year, rating } = input;
+        const movie = {
+          title,
+          rating,
+          year
+        };
         await this.$apollo.mutate({
           mutation: ADD_MOVIE,
-          variables: {
-            title,
-            rating,
-            year
-          }
+          variables: movie
         });
 
         this.success("The movie is added");
+        this.localmovies.push(movie);
       } catch (error) {
         this.error(error);
       }
@@ -149,6 +155,9 @@ export default {
   name: "home",
 
   computed: {
+    addedMovies() {
+      return this.localmovies;
+    },
     token: {
       get() {
         return this.$store.getters.getToken;

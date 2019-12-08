@@ -81,6 +81,7 @@ export default {
     })).data.movies;
     this.loading = false;
   },
+  props: ["addedMovies"],
   data() {
     return {
       loading: false,
@@ -113,7 +114,7 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     computedMovies() {
-      return !this.authenticated ? [] : this.movies;
+      return !this.authenticated ? [] : [...this.movies, ...this.addedMovies];
     }
   },
   watch: {
