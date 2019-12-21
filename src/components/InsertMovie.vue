@@ -9,7 +9,7 @@
         type="Number"
         v-model="model.year"
         min="0"
-        :max=" parseInt(new Date().getFullYear())"
+        :max="parseInt(new Date().getFullYear())"
       >
       </b-input>
     </b-field>
