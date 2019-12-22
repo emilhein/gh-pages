@@ -47,11 +47,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!ws"> Lading...</div>
-    <div
-      v-else
-      class="columns is-success"
-    >
+    <div class="columns is-success">
       <div class="column">
         <img
           src="./../assets/finder.jpeg"
@@ -99,17 +95,6 @@
 
         </section>
       </div>
-      <!-- <div class="column">
-        Packer
-        <section>
-          <b-table
-            :data="packerItems"
-            :columns="columns"
-            :row-class="(row, index) => `color-${getNumber(row.content)}`"
-          ></b-table>
-
-        </section>
-      </div> -->
 
     </div>
 

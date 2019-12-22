@@ -1,34 +1,4 @@
 <template>
-  <!-- <nav class="navbar is-info">
-    <div class="container">
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="#"
-          style="font-weight:bold;"
-        >
-          Emil Hein
-        </a>
-        <span
-          class="navbar-burger burger"
-          data-target="navMenu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-      </div>
-      <div
-        id="navMenu"
-        class="navbar-menu"
-      >
-        <div class="navbar-end">
-    
-        </div>
-
-      </div>
-    </div>
-  </nav> -->
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
       <a
@@ -63,71 +33,13 @@
         >
           Home
         </a>
-        <!-- <a
-          class="navbar-item"
-          @click="changeLink('projects')"
-        >
-          Projects
-        </a> -->
         <a
           class="navbar-item"
           @click="changeLink('websocket')"
         >
           Websocket
         </a>
-        <!-- <div class="navbar-item has-dropdown is-hoverable">
-          <a
-            class="navbar-link"
-            href="https://bulma.io/documentation/overview/start/"
-          >
-            Docs
-          </a>
-          <div class="navbar-dropdown is-boxed">
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/overview/start/"
-            >
-              Overview
-            </a>
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/modifiers/syntax/"
-            >
-              Modifiers
-            </a>
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/columns/basics/"
-            >
-              Columns
-            </a>
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/layout/container/"
-            >
-              Layout
-            </a>
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/form/general/"
-            >
-              Form
-            </a>
-            <hr class="navbar-divider">
-            <a
-              class="navbar-item"
-              href="https://bulma.io/documentation/elements/box/"
-            >
-              Elements
-            </a>
-            <a
-              class="navbar-item is-active"
-              href="https://bulma.io/documentation/components/breadcrumb/"
-            >
-              Components
-            </a>
-          </div>
-        </div> -->
+
       </div>
 
       <div class="navbar-end">
