@@ -1,12 +1,35 @@
-# gh-pages project
+# vue3-example
 
-[![Build Status](https://travis-ci.org/emilhein/gh-pages.svg?branch=master)](https://travis-ci.org/emilhein/gh-pages)
+This template should help get you started developing with Vue 3 in Vite.
 
-The project that build and deploys to this github profil's GH page.
+## Recommended IDE Setup
 
-## run local
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-```js
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
 npm install
-npm run serve
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
 ```
