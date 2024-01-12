@@ -11,13 +11,17 @@ script:
 cache:
 directories:
     - "node_modules"
+# deploy:
+#     provider: pages
+#     local_dir: dist
+#     skip_cleanup: true
+#     github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+#     repo: emilhein/emilhein.github.com
+#     target-branch: master
+#     keep_history: true
+#     on:
+#         branch: master
 deploy:
-    provider: pages
-    local_dir: dist
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-    repo: emilhein/emilhein.github.com
-    target-branch: master
-    keep_history: true
-    on:
-        branch: master
+  provider: pages:git
+  token: $GITHUB_TOKEN
+  edge: true # opt in to dpl v2
