@@ -1,22 +1,29 @@
+<script setup>
+const props = defineProps(['post'])
+const openPostWindow = (url) => {
+  window.open(url, '_blank')
+}
+</script>
+
 <template>
-  <div class="card">
+  <div class="card" @click="openPostWindow(post.mediumUrl)">
     <div class="card__header">
-      <slot name="icon"></slot>
+      <img :src="`https://miro.medium.com/v2/resize:fill:500:200/${post.previewImage.id}`" alt="Post Image" class="post-image" />
+
     </div>
     <div class="card__body">
       <h4>
-        <slot name="heading"></slot>
+        {{ post.title }}
       </h4>
       <p>
-        <slot></slot>
+        {{ post.extendedPreviewContent.subtitle }}
       </p>
     </div>
     <div class="card__footer">
       <div class="user">
-
         <div class="user__info">
           <small>
-            <slot name="length"></slot>
+            {{ Math.ceil(post.readingTime) }} minutes
           </small>
         </div>
       </div>
@@ -77,4 +84,5 @@ img {
 
 .user__info>small {
   color: #666;
-}</style> 
+}
+</style> 

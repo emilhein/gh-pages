@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import PostList from '../components/postList.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <PostList />
   </main>
 </template>

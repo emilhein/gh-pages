@@ -1,26 +1,39 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
+import { useTabStore } from './stores/tab'
+
+const tabStore = useTabStore()
+
+
+
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  <header>
+    <el-tabs v-model="tabStore.tab"  tab-position="top"  class="demo-tabs" >
+      <el-tab-pane label="Design 1" name="MediumPreview" />
+      <el-tab-pane label="Design 2" name="MediumPreview2" />
+    </el-tabs>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <!-- <HelloWorld msg="You did it!" /> -->
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <!-- <nav> -->
+      <!-- <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink> -->
+      <!-- </nav> -->
     </div>
-  </header> -->
+  </header>
 
   <RouterView />
 </template>
 
 <style scoped>
+.demo-tabs>.el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
