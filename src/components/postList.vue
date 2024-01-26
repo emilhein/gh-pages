@@ -17,8 +17,8 @@ const loading = computed(() => {
 
 <template>
   <div class="container">
-    <!-- <Spinner v-if="loading"></Spinner> -->
-    <KeepAlive >
+    <Spinner v-if="loading"></Spinner>
+    <KeepAlive v-else>
       <Transition  name="translate" mode="out-in" v-for="(post) in postStore.posts" :key="post.title">
         <component :is="componentMap[tabStore.tab]" :post="post" />
       </Transition>
