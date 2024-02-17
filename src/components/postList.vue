@@ -6,8 +6,9 @@ import { computed } from 'vue'
 
 import MediumPreview from './blogDesigns/MediumPreview.vue'
 import MediumPreview2 from './blogDesigns/MediumPreview2.vue'
+import MediumPreview3 from './blogDesigns/MediumPreview3.vue'
 
-const componentMap = { MediumPreview, MediumPreview2 }
+const componentMap = { MediumPreview, MediumPreview2, MediumPreview3 }
 const tabStore = useTabStore()
 const postStore = usePostsStore()
 const loading = computed(() => {

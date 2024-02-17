@@ -1,7 +1,4 @@
 <script setup>
-import { useTabStore } from './stores/tab'
-
-const tabStore = useTabStore()
 
 
 
@@ -9,29 +6,21 @@ const tabStore = useTabStore()
 
 <template>
   <el-container>
+    <el-menu mode="horizontal" :popper-offset="16" default-active="1" style="width: 600px">
+
+      <el-menu-item index="1">
+        <span> <router-link to="/">Articles</router-link></span>
+      </el-menu-item>
+
+    </el-menu>
 
 
-    <el-header>
-      <el-tabs v-model="tabStore.tab" tab-position="top" class="demo-tabs">
-        <el-tab-pane label="Design 1" name="MediumPreview" />
-        <el-tab-pane label="Design 2" name="MediumPreview2" />
-      </el-tabs>
 
 
-    </el-header>
-    <el-main>
-      <RouterView />
 
-    </el-main>
+
   </el-container>
+  <RouterView />
 </template>
 
-<style scoped>
-.demo-tabs>.el-tabs__content {
-  padding: 32px;
-  color: #6b778c;
-  font-size: 32px;
-  font-weight: 600;
-}
-
-</style>
+<style scoped></style>
