@@ -88,13 +88,25 @@ const options = ref({
     }
   ]
 })
-const URL = `https://iwa1uk4vy8.execute-api.us-east-1.amazonaws.com/dev/chartprompt`
+const URL = ` https://v5q8ju87ha.execute-api.us-east-1.amazonaws.com/dev/chartprompt`
 const getMagicConfiguration = async () => {
-  loading.value = true
-  const response = await fetch(URL, { method: 'POST', body: JSON.stringify({ apiKey: key.value, prompt: prompt.value }) })
-  const config = await response.json();
-  options.value = config
-  loading.value = false
+  try {
+
+    loading.value = true
+    const response = await fetch(URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        apiKey: key.value,
+        prompt: prompt.value,
+      })
+    })
+    const config = await response.json();
+    options.value = config
+    loading.value = false
+  } catch (error) {
+    loading.value = false
+
+  }
 
 }
 </script>

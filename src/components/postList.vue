@@ -55,7 +55,8 @@ const loading = computed(() => {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1200px;
+  /* max-width: 1200px; */
+  font-weight: ;
   margin-block: 2rem;
   gap: 2rem;
 }
