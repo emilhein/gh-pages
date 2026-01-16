@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MagicChart from '../views/MagicChart.vue'
+import SideProjectView from '../views/SideProjectView.vue'
 
 const router = createRouter({
     history: createWebHistory(
@@ -12,9 +12,9 @@ const router = createRouter({
             component: HomeView
         },
         {
-            path: '/magic-chart',
-            name: 'magic-chart',
-            component: MagicChart
+            path: '/side-project',
+            name: 'side-project',
+            component: SideProjectView
         },
 
     ]
