@@ -149,7 +149,6 @@
       </div>
 
        <div class="footer-note">
-        <p>Built as a side project to learn Serverless and Vue 3 eco-system.</p>
         <a href="https://sparbenzin.dk" target="_blank" class="cta-button">Visit Live Site</a>
       </div>
 
